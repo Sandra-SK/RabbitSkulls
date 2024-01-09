@@ -11,7 +11,7 @@ site e-commerce de click and collect pour RSRDA - par Sandra KUBICKI
 Construction du back avec Node.js (gestion des routes  avec la librairie express) 
 le Front quand à lui est construit avec React.js
 
-les données d’environnement gérées avec .env (fichier non présent sur le code gitHub)
+les données d’environnement gérées avec .env (fichiers non présents sur le code gitHub)
 
 
     
