@@ -22,7 +22,12 @@ module.exports = (app, db)=>{
                return res.json({status: 401, msg: "Email déjà utilisé."})
             }
         } else {
-            //si mail inexistant: enregistrement de l'utilisateur
+            //ajout d'un regex pour contrôler la qualité minimum du mot de passe choisi
+            const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*-_])(?=.{8,})/
+            if (!passwordRegex.test(req.body.password)){
+                return res.json({status:400, msg:"Le mot de passe doit contenir au moins une lettre minuscule, une lettre majuscule, un chiffre, un caractère spécial (!@#$%^&*-_) et comporter 8 caractères minimum."})
+            }    
+            //si mail inexistant et regex ok: enregistrement de l'utilisateur
             let user = await userModel.saveOneUser(req)
             if(user.code){
                return res.json({status: 500, msg: "erreur lors de l'enregistrement de l'utilisateur", err: user})
